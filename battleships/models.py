@@ -11,10 +11,16 @@ class User(models.Model):
     login = models.CharField(max_length=25)
     password = models.CharField(max_length=25)
 
+    def __str__(self):
+        return self.login
+
 
 class Game(models.Model):
-    firstPlayer = models.ForeignKey(User)
-    secondPlayer = models.ForeignKey(User)
+    firstPlayer = models.OneToOneField(User, related_name="player_one")
+    secondPlayer = models.OneToOneField(User, related_name="player_two")
+
+    def __str__(self):
+        return str(self.firstPlayer) + " " +  str(self.secondPlayer)
 
 
 class Question(models.Model):
