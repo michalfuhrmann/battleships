@@ -1,8 +1,10 @@
-from django.conf.urls import url
+from django.conf.urls import url, include
 
 from . import views
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
-    url(r'^user/', as_view(), name='results')
+    url("^login/$", views.login, name="login"),
+    url("^index/$", views.index, name="index")
+
 ]
