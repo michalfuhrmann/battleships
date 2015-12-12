@@ -18,6 +18,11 @@ def get_logged_user(user_session):
     return SESSIONS.get(user_session)
 
 
+def invalidate_session(user_session):
+    if user_session in SESSIONS:
+        del SESSIONS[user_session]
+
+
 def hash_password(password, salt=uuid.uuid4().hex):
     string = password + salt
     string = string.encode('utf-8')

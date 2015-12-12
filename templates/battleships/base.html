@@ -7,6 +7,11 @@
 <body>
 
 <p> Hello {{ app_user }}</p>
+{% if app_user != 'gosc' %}
+    <form action="/battleships/logout">
+        <input type="submit" value="wyloguj" />
+    </form>
+{% endif %}
 
 <div id="blockContent">
 

@@ -1,7 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
-from battleships.user_services import user_login, user_register, create_session, get_logged_user
+from battleships.user_services import user_login, user_register, create_session, get_logged_user, invalidate_session
 
 COOKIE_SESSION = 'session-cookie'
 
@@ -12,6 +12,15 @@ def my_render(request, template, variables={}):
         username = get_logged_user(user_session)
         variables['app_user'] = username if username else 'gosc'
     return render(request, template, variables)
+
+
+def login_required(function):
+    def wrapper(request, *args, **kwargs):
+        if get_logged_user(request.COOKIES.get(COOKIE_SESSION)):
+            return function(request, *args, **kwargs)
+        else:
+            return HttpResponseRedirect('/battleships/login')
+    return wrapper
 
 
 def index(request):
@@ -33,6 +42,13 @@ def login(request):
         return my_render(request, "battleships/user/login.html", {"error": 'Zly login/haslo'})
 
 
+def logout(request):
+    user_session = request.COOKIES.get(COOKIE_SESSION)
+    invalidate_session(user_session)
+
+    return HttpResponseRedirect('/battleships/login')
+
+
 def register(request):
     if request.method == 'GET':
         return my_render(request, "battleships/user/register.html")
@@ -50,6 +66,8 @@ def register(request):
         return my_render(request, "battleships/user/register.html", {"error": error})
 
 
+
+@login_required
 def main(request):
     return my_render(request, "battleships/user/main.html")
 
