@@ -11,24 +11,28 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Choice',
+            name='Game',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
-                ('choice_text', models.CharField(max_length=200)),
-                ('votes', models.IntegerField(default=0)),
+                ('id', models.AutoField(primary_key=True, serialize=False, verbose_name='ID', auto_created=True)),
             ],
         ),
         migrations.CreateModel(
-            name='Question',
+            name='User',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
-                ('question_text', models.CharField(max_length=200)),
-                ('pub_date', models.DateTimeField(verbose_name='date published')),
+                ('id', models.AutoField(primary_key=True, serialize=False, verbose_name='ID', auto_created=True)),
+                ('username', models.CharField(unique=True, max_length=25)),
+                ('salt', models.CharField(max_length=25)),
+                ('password', models.CharField(max_length=25)),
             ],
         ),
         migrations.AddField(
-            model_name='choice',
-            name='question',
-            field=models.ForeignKey(to='battleships.Question'),
+            model_name='game',
+            name='firstPlayer',
+            field=models.OneToOneField(related_name='player_one', to='battleships.User'),
+        ),
+        migrations.AddField(
+            model_name='game',
+            name='secondPlayer',
+            field=models.OneToOneField(related_name='player_two', to='battleships.User'),
         ),
     ]

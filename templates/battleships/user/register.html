@@ -1,10 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+{% extends "battleships/base.html" %}
 
-</body>
-</html>
+
+{% block content %}
+    <div id="login">
+        <form class="form-horizontal" name="LoginForm" action="/battleships/register/" method="post">
+        <div class="control-group">
+            <label class="control-label" for="username">Username</label>
+            <div class="controls">
+                <input type="text" id="username" name="username"  placeholder="Username">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="password1">Password</label>
+            <div class="controls">
+                <input type="password" name="password1" id="password1" placeholder="Password">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="password2">Password</label>
+            <div class="controls">
+                <input type="password" name="password2" id="password2" placeholder="Password">
+            </div>
+        </div>
+            <div>{{ error }}</div>
+        <div class="control-group">
+            <div class="controls">
+                <button type="submit" class="btn">Register</button>
+            </div>
+        </div>
+        </form>
+    </div>
+{% endblock %}
