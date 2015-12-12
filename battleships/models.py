@@ -13,12 +13,23 @@ class User(models.Model):
     password = models.CharField(max_length=25)
 
     def __str__(self):
-        return self.login
+        return self.username
 
 
 class Game(models.Model):
+    OPEN = 'o'
+    IN_PROGRESS = 'w'
+    END = 'z'
+    STATES = (
+        (OPEN, 'otwarta'),
+        (IN_PROGRESS, 'w trakcie'),
+        (END, 'zakonczona'),
+    )
+
     firstPlayer = models.OneToOneField(User, related_name="player_one")
-    secondPlayer = models.OneToOneField(User, related_name="player_two")
+    secondPlayer = models.OneToOneField(User, related_name="player_two", null=True)
+    status = models.CharField(max_length=1, choices=STATES, default=OPEN)
+    date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return str(self.firstPlayer) + " " +  str(self.secondPlayer)
+        return str(self.firstPlayer) + " " + str(self.secondPlayer) + str(self.status)

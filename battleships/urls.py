@@ -9,4 +9,6 @@ urlpatterns = [
     url("^register/$", views.register, name="register"),
     url("^index/$", views.index, name="index"),
     url("^main/$", views.main, name="main"),
+    url("^games/$", views.games),
+    url("^new-game/$", views.new_game)
 ]

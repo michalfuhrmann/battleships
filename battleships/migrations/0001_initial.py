@@ -13,13 +13,15 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Game',
             fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False, verbose_name='ID', auto_created=True)),
+                ('id', models.AutoField(verbose_name='ID', primary_key=True, serialize=False, auto_created=True)),
+                ('status', models.CharField(max_length=1, choices=[('o', 'otwarta'), ('w', 'w trakcie'), ('z', 'zakonczona')])),
+                ('date', models.DateTimeField(auto_now_add=True)),
             ],
         ),
         migrations.CreateModel(
             name='User',
             fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False, verbose_name='ID', auto_created=True)),
+                ('id', models.AutoField(verbose_name='ID', primary_key=True, serialize=False, auto_created=True)),
                 ('username', models.CharField(unique=True, max_length=25)),
                 ('salt', models.CharField(max_length=25)),
                 ('password', models.CharField(max_length=25)),

@@ -1,0 +1,25 @@
+{% extends "battleships/base.html" %}
+
+{% block content %}
+
+<form action="/battleships/new-game">
+    <input type="submit" value="Nowa gra" />
+</form>
+<table>
+    <tr>
+        <th>username</th>
+        <th>status</th>
+        <th>date</th>
+    </tr>
+    {% for game in games %}
+        <tr>
+            <td>{{ game.firstPlayer }}</td>
+            <td>{{ game.status }}</td>
+            <td>{{ game.date }}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+
+
+{% endblock %}
