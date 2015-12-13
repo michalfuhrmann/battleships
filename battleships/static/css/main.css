@@ -1,28 +1,28 @@
 #container {
     width: 960px;
     margin: 0 auto;
-    background-color: aqua;
+    background-color: gray;
 }
 
 #header {
-    background-color: orange;
+    background-color: darkgrey;
 }
 
 #user-header {
-    background-color: pink;
+    background-color: cadetblue;
     text-align: right;
 
 }
 #menu {
     float: left;
     width: 240px;
-    background-color: green;
+    background-color: darkcyan;
 }
 
 #block-content {
     float: left;
     width: 480px;
-    background-color: red;
+    background-color: darkseagreen;
 }
 
 #footer {
