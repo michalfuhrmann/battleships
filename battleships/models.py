@@ -31,5 +31,10 @@ class Game(models.Model):
     status = models.CharField(max_length=1, choices=STATES, default=OPEN)
     date = models.DateTimeField(auto_now_add=True)
 
+    def get_status(self):
+        for state in Game.STATES:
+            if state[0] == self.status:
+                return state[1]
+
     def __str__(self):
         return str(self.firstPlayer) + " " + str(self.secondPlayer) + str(self.status)

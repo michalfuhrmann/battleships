@@ -1,0 +1,35 @@
+#container {
+    width: 960px;
+    margin: 0 auto;
+    background-color: aqua;
+}
+
+#header {
+    background-color: orange;
+}
+
+#user-header {
+    background-color: pink;
+    text-align: right;
+
+}
+#menu {
+    float: left;
+    width: 240px;
+    background-color: green;
+}
+
+#block-content {
+    float: left;
+    width: 480px;
+    background-color: red;
+}
+
+#footer {
+    clear: both;
+    background-color: yellow;
+}
+
+#container h1 {
+    text-align: center;
+}

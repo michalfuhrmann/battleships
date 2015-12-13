@@ -3,23 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}">
 </head>
 <body>
 
-<p> Hello {{ app_user }}</p>
-{% if app_user != 'gosc' %}
-    <form action="/battleships/logout">
-        <input type="submit" value="wyloguj" />
-    </form>
-{% endif %}
+<div id="container">
+    <div id="header">
+        <h1> Battle ships </h1>
 
-<div id="blockContent">
+        <div id="user-header">
+            <p> Hello {{ app_user }}</p>
+            {% if app_user != '' %}
+                <form action="/battleships/logout">
+                    <input type="submit" value="Logout"/>
+                </form>
+            {% endif %}
+            <form class="form-horizontal" name="language-chooser"
+                  action="/battleships/choose_language?return_url={{ request.path }}"
+                  method="post">
+                <p>Available languages :
+                    <select name="selected_language">
+                        {% for lang in app_languages %}
+                            <option value="{{ lang }}">{{ lang }}</option>
+                        {% endfor %}
+                    </select>
 
-    {% block content %}
+                    <input type="submit" value="Go">
+                </p>
+            </form>
 
-    {% endblock %}
+
+        </div>
+    </div>
+    <div id="menu">
+        <ul>
+            <li><a href="/battleships/index">{{ index }}</a></li>
+            <li><a href="/battleships/games">{{ game_list }}</a></li>
+            <li><a href="/battleships/login">{{ login }}</a></li>
+            <li><a href="/battleships/register">{{ register }}</a></li>
+            {#            <li><a href="#">Link 5</a></li>#}
+        </ul>
+    </div>
+
+    <div id="block-content">
+
+        {% block content %}
+
+        {% endblock %}
 
 
+    </div>
+    <div id="footer">
+        <p> I'm footer </p>
+    </div>
 </div>
+
 </body>
 </html>

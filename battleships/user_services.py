@@ -5,7 +5,9 @@ from battleships.models import User
 
 
 # key - hash, value - username
-COOKIE_SESSION = 'session-cookie'
+SESSION_COOKIE = 'session-cookie'
+LANGUAGE_COOKIE = 'language-cookie'
+DEFAULT_LANGUAGE = "EN"
 SESSIONS = {}
 
 
@@ -18,8 +20,19 @@ def create_session(username):
     return user_session
 
 
+def add_language_cookie(response, language):
+    response.set_cookie(LANGUAGE_COOKIE, language)
+
+
+def get_language_cookie(request):
+    language_from_cookie = request.COOKIES.get(LANGUAGE_COOKIE)
+    if language_from_cookie is None:
+        return DEFAULT_LANGUAGE
+    return language_from_cookie
+
+
 def get_user_session(request):
-    return request.COOKIES.get(COOKIE_SESSION)
+    return request.COOKIES.get(SESSION_COOKIE)
 
 
 def get_current_username_by_user_session(user_session):
@@ -35,8 +48,8 @@ def get_current_user(request):
     return User.objects.get(username=username)
 
 
-def add_user_cookie(response,user_session):
-    response.set_cookie(COOKIE_SESSION, user_session)
+def add_user_cookie(response, user_session):
+    response.set_cookie(SESSION_COOKIE, user_session)
 
 
 def invalidate_session(user_session):
